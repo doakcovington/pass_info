@@ -4,7 +4,6 @@ class PassInfo::Cli
       puts "\nWelcome to Pass Info!"
       puts "Pass Info provides you with up to date status reports for all Washington State Mountain Passes."
       puts "Please be sure you are not driving while using this app!"
-      get_passes
       menu
       pass_report
     end
@@ -19,7 +18,10 @@ class PassInfo::Cli
     end
     
     def get_passes
+        PassInfo::Pass.new("Blewett Pass")
+        PassInfo::Pass.new("Cayuse Pass")
         @passes = PassInfo::Pass.all
+        #binding.pry
     end
 
     # def mountain_passes
@@ -29,7 +31,7 @@ class PassInfo::Cli
     # end
 
     def list_passes
-        @passes.each_with_index {|pass, index| puts "#{index + 1}. #{pass}"}
+        @passes.each_with_index {|pass, index| puts "#{index + 1}. #{pass.name}"}
     end
 
     def get_user_pass

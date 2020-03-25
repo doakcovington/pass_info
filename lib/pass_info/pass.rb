@@ -1,10 +1,19 @@
 class PassInfo::Pass
 
-    @@all = ["Blewett Pass","Cayuse Pass","Chinook Pass","Crystal to Greenwater",
-    "Disautel Pass","Loup Loup Pass","Manastash Ridge","Mt. Baker Hwy","North Cascades Hwy",
-    "Satus Pass","Sherman Pass","Snoqualmie Pass","Stevens Pass","Wauconda Pass","White Pass",]
+    attr_accessor :name
+
+    def initialize(name)
+        @name = name
+        save
+    end
+
+    @@all = []
 
     def self.all
         @@all
+    end
+
+    def save
+        @@all << self
     end
 end
