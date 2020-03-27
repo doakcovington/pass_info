@@ -18,8 +18,6 @@ class PassInfo::Cli
     end
     
     def get_passes
-        PassInfo::Pass.new("Blewett Pass")
-        PassInfo::Pass.new("Cayuse Pass")
         @passes = PassInfo::Pass.all
         #binding.pry
     end
