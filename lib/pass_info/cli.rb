@@ -50,7 +50,7 @@ class PassInfo::Cli
     end
     
     def pass_report
-        puts "#{get_user_pass} Report:"
+        puts "#{get_user_pass.name} Report:"
         # PassInfo::Pass.all.each do |pass|
         #     puts pass.name
         #     puts pass.temperature

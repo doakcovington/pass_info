@@ -1,0 +1,4 @@
+class PassInfo::Report
+
+
+end
