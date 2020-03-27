@@ -50,16 +50,19 @@ class PassInfo::Cli
     end
     
     def pass_report
+        pass = @passes[@input_to_index]
+        report = pass.report
         puts "#{get_user_pass.name} Report:"
-        # PassInfo::Pass.all.each do |pass|
-        #     puts pass.name
+        PassInfo::Pass.all.each do |pass|
+            binding.pry
+            puts pass.name
         #     puts pass.temperature
         #     puts pass.elevation
         #     puts pass.restrictionsone
         #     puts pass.restrictionstwo
         #     puts pass.conditions
         #     puts pass.weather
-        # end
+        end
     end
 
   end
