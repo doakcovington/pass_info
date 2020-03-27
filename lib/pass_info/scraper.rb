@@ -10,9 +10,5 @@ class PassInfo::Scraper
         end
     end
 
-    def self.scrape_report(pass)
-        PassInfo::Report.new(pass)
-    end
-
 
 end

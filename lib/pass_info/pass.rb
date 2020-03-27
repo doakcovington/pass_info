@@ -17,7 +17,6 @@ class PassInfo::Pass
     end
 
     def report
-        PassInfo::Scraper.scrape_report(self) if @report.empty?
         @report
     end
 

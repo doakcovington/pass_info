@@ -2,7 +2,7 @@ require_relative "./pass_info/version"
 require_relative "./pass_info/cli"
 require_relative "./pass_info/pass"
 require_relative "./pass_info/scraper"
-require_relative "./pass_info/report"
+
 
 require "pry"
 require "nokogiri"

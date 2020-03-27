@@ -52,7 +52,7 @@ class PassInfo::Cli
     def pass_report
         pass = @passes[@input_to_index]
         report = pass.report
-        puts "#{get_user_pass.name} Report:"
+        puts "Pass Report:"
         PassInfo::Pass.all.each do |pass|
             binding.pry
             puts pass.name
