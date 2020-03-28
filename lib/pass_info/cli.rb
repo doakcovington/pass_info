@@ -1,7 +1,7 @@
 
 class PassInfo::Cli 
     def call 
-      puts "\nWelcome to Pass Info!"
+      puts "Welcome to Pass Info!"
       puts "Pass Info provides you with up to date status reports for all Washington State Mountain Passes."
       puts "Please be sure you are not driving while using this app!"
       menu
@@ -45,11 +45,11 @@ class PassInfo::Cli
 
     def get_report
         report = PassInfo::Scraper.scrape_report
-        #binding.pry
+        binding.pry
     end
     
     def pass_report
-        puts "Pass Report for #{get_user_pass.name}"
+        puts "Pass Report:#{PassInfo::Pass.all.first.name}"
         get_report.each do |key, value|
             puts "#{key}: #{value}"
         #     puts pass.temperature
