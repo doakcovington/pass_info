@@ -10,6 +10,7 @@ class PassInfo::Cli
 
     def menu
         get_passes
+        get_report
         list_passes
         get_user_pass
         if !valid_input?
@@ -22,12 +23,6 @@ class PassInfo::Cli
         #binding.pry
     end
 
-    # def mountain_passes
-    #     @passes = ["Blewett Pass","Cayuse Pass","Chinook Pass","Crystal to Greenwater",
-    #             "Disautel Pass","Loup Loup Pass","Manastash Ridge","Mt. Baker Hwy","North Cascades Hwy",
-    #             "Satus Pass","Sherman Pass","Snoqualmie Pass","Stevens Pass","Wauconda Pass","White Pass",]
-    # end
-
     def list_passes
         @passes.each_with_index {|pass, index| puts "#{index + 1}. #{pass.name}"}
     end
@@ -36,9 +31,8 @@ class PassInfo::Cli
         @input = gets.strip #get input from user
         #binding.pry
         @input_to_index = @input.to_i - 1 #convert user input to array index
-        flag = @passes[@input_to_index] #the pass the user chose
-        flag #returns pass
-        #binding.pry
+        @passes[@input_to_index] #the pass the user chose
+
     end
 
     def valid_input?
@@ -51,15 +45,13 @@ class PassInfo::Cli
 
     def get_report
         report = PassInfo::Scraper.scrape_report
+        #binding.pry
     end
     
     def pass_report
-        pass = @passes[@input_to_index]
-        report = pass.report
-        puts "Pass Report:"
-        PassInfo::Pass.all.each do |pass|
-            #binding.pry
-            puts pass.name
+        puts "Pass Report for #{get_user_pass.name}"
+        get_report.each do |key, value|
+            puts "#{key}: #{value}"
         #     puts pass.temperature
         #     puts pass.elevation
         #     puts pass.restrictionsone

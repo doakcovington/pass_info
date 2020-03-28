@@ -13,6 +13,10 @@ class PassInfo::Scraper
     def self.scrape_report
         report = {}
         report[:temp] = 50
+        report[:elevation] = 1000
+        report[:Restrictions] = 'none'
+        report[:conditions] = 'roadways are wet'
+        report[:weather] = 'partly cloudy'
         #doc.css("div#PassPageBoxPanel.content")
         #temp = doc.css("span#PassInfoTemperature")
         #elevation = doc.css("span#PassInfoElevationF")
