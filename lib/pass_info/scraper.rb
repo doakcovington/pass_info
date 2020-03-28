@@ -11,12 +11,19 @@ class PassInfo::Scraper
     end
 
     def self.scrape_report
-        report = {}
-        report[:temp] = 50
-        report[:elevation] = 1000
-        report[:Restrictions] = 'none'
-        report[:conditions] = 'roadways are wet'
-        report[:weather] = 'partly cloudy'
+        doc = Nokogiri::HTML(open("https://www.wsdot.com/traffic/passes/blewett/default.aspx"))
+        report = doc.css("div#PassPageBoxPanel.content")
+        pass_report = {}
+        report.each do |info|
+            pass_report[:Temperature] = info.css("span#PassInfoTemperature").text
+            pass_report[:Elevation] = info.css("span#PassInfoElevationF").text
+            pass_report[:Restrictions_One] = info.css("span#PassInfoRestrictionsOne").text
+            pass_report[:Restrictions_Two] = info.css("span#PassInfoRestrictionsTwo").text
+            pass_report[:Coditions] = info.css("span#PassInfoConditions").text
+            pass_report[:Weather] = info.css("span#PassInfoWeather").text
+            #report[:Restrictions] = 'none'
+            #report[:conditions] = 'roadways are wet'
+            #report[:weather] = 'partly cloudy'
         #doc.css("div#PassPageBoxPanel.content")
         #temp = doc.css("span#PassInfoTemperature")
         #elevation = doc.css("span#PassInfoElevationF")
@@ -24,7 +31,8 @@ class PassInfo::Scraper
         #restrictions two = doc.css("span#PassInfoRestrictionsTwo")
         #conditions = doc.css("span#PassInfoConditions")
         #weather = doc.css("span#PassInfoWeather")
-        report
+        end
+        pass_report
         #binding.pry
     end
 
