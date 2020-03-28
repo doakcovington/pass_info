@@ -48,13 +48,17 @@ class PassInfo::Cli
         end
         flag
     end
+
+    def get_report
+        report = PassInfo::Scraper.scrape_report
+    end
     
     def pass_report
         pass = @passes[@input_to_index]
         report = pass.report
         puts "Pass Report:"
         PassInfo::Pass.all.each do |pass|
-            binding.pry
+            #binding.pry
             puts pass.name
         #     puts pass.temperature
         #     puts pass.elevation

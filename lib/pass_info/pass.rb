@@ -1,6 +1,6 @@
 class PassInfo::Pass
 
-    attr_accessor :name
+    attr_accessor :name, :temp
     attr_writer :report
 
     def initialize(name)
@@ -17,6 +17,7 @@ class PassInfo::Pass
     end
 
     def report
+        PassInfo::Scraper.scrape_passes if @report.empty?
         @report
     end
 
