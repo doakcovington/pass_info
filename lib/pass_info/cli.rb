@@ -16,7 +16,7 @@ class PassInfo::Cli
         get_report
         while !valid_input?
             puts "\n #{@input} is not a valid number. Please enter a valid number..."
-            get_user_pass
+            user_input
         end
     end
     
