@@ -10,9 +10,9 @@ class PassInfo::Cli
 
     def menu
         get_passes
-        get_report
         list_passes
         get_user_pass
+        get_report
         if !valid_input?
             puts "\n #{@input} is not a valid number. Please enter a valid number..."
         end
@@ -20,7 +20,6 @@ class PassInfo::Cli
     
     def get_passes
         @passes = PassInfo::Pass.all
-        #binding.pry
     end
 
     def list_passes
@@ -32,7 +31,6 @@ class PassInfo::Cli
         #binding.pry
         @input_to_index = @input.to_i - 1 #convert user input to array index
         @passes[@input_to_index] #the pass the user chose
-
     end
 
     def valid_input?
@@ -45,11 +43,12 @@ class PassInfo::Cli
 
     def get_report
         report = PassInfo::Scraper.scrape_report
-        binding.pry
+        #binding.pry
     end
     
     def pass_report
-        puts "Pass Report:#{PassInfo::Pass.all.first.name}"
+        binding.pry
+        puts "Pass Report:#{get_user_pass.name}"
         get_report.each do |key, value|
             puts "#{key}: #{value}"
         #     puts pass.temperature

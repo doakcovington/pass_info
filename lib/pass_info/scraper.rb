@@ -10,11 +10,12 @@ class PassInfo::Scraper
         end
     end
 
-    def self.scrape_report
+    def self.scrape_report#"https://www.wsdot.com/traffic/passes/blewett/default.aspx"
         doc = Nokogiri::HTML(open("https://www.wsdot.com/traffic/passes/blewett/default.aspx"))
         report = doc.css("div#PassPageBoxPanel.content")
         pass_report = {}
         report.each do |info|
+            pass_report[:Name] = info.css("h2#ctl00_ctl00_PageHeader")
             pass_report[:Temperature] = info.css("span#PassInfoTemperature").text
             pass_report[:Elevation] = info.css("span#PassInfoElevationF").text
             pass_report[:Restrictions_One] = info.css("span#PassInfoRestrictionsOne").text

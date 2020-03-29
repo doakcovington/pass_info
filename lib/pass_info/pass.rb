@@ -1,15 +1,13 @@
 class PassInfo::Pass
 
-    attr_accessor :name, :temp
-    attr_writer :report
+    attr_accessor :name, :temperature, :elevation, :restrictions_one, :restrictions_two, :conditions, :weather
+
+    @@all = []
 
     def initialize(name)
         @name = name
-        @report = []
         save
     end
-
-    @@all = []
 
     def self.all
         PassInfo::Scraper.scrape_passes if @@all.empty?
