@@ -3,12 +3,18 @@ class PassInfo::Scraper
     def self.scrape_passes
         doc = Nokogiri::HTML(open("https://www.wsdot.com/traffic/passes/"))
         passes = doc.css("div.trafficCol div.content ul li")
+        count = 0
         passes.each do |pass|
-            name = pass.text
-            ref = pass.css('a').attribute('href').value
-            PassInfo::Pass.new(name,ref)
+            if count <= 14
+                name = pass.text
+                ref = pass.css('a').attribute('href').value
+                PassInfo::Pass.new(name,ref)
+                count += 1
+            end
             #binding.pry
         end
+        count
+        #binding.pry
     end
 
     def self.scrape_report#"https://www.wsdot.com/traffic/passes/blewett/default.aspx"
