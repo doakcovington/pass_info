@@ -10,10 +10,11 @@ class PassInfo::Cli
 
     def menu
         get_passes
-        get_pass_url
         list_passes
+        get_pass_urls
         user_input
         get_user_pass
+        get_user_pass_url
         get_report
         while !valid_input?
             puts "\n #{@input} is not a valid number. Please enter a valid number..."
@@ -25,9 +26,11 @@ class PassInfo::Cli
         @passes = PassInfo::Pass.all
     end
 
-    def get_pass_url
-        a = PassInfo::Pass.urls
-        binding.pry
+    def get_pass_urls
+        @urls = []
+        PassInfo::Pass.all.each do |link|
+            @urls << link.url
+        end
     end
 
     def list_passes
@@ -42,6 +45,11 @@ class PassInfo::Cli
         #binding.pry
         @input_to_index = @input.to_i - 1 #convert user input to array index
         @passes[@input_to_index] #the pass the user chose
+    end
+
+    def get_user_pass_url
+        flag = @urls[@input_to_index]
+        flag
     end
 
     def valid_input?
