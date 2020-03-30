@@ -4,6 +4,8 @@ class PassInfo::Pass
 
     @@all = []
 
+    @@urls = []
+
     def initialize(name,url)
         @name = name
         @url = url
@@ -13,6 +15,12 @@ class PassInfo::Pass
     def self.all
         PassInfo::Scraper.scrape_passes if @@all.empty?
         @@all
+    end
+
+    def self.urls
+        self.all.each do |link|
+            @@urls << link.url
+        end
     end
 
     def report

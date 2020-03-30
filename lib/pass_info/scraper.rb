@@ -17,6 +17,8 @@ class PassInfo::Scraper
         #binding.pry
     end
 
+    #try using .send to send the info from the hash to the report
+
     def self.scrape_report#"https://www.wsdot.com/traffic/passes/blewett/default.aspx"
         doc = Nokogiri::HTML(open("https://www.wsdot.com/traffic/passes/blewett/default.aspx"))
         report = doc.css("div#PassPageBoxPanel.content")

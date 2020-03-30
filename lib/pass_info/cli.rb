@@ -10,6 +10,7 @@ class PassInfo::Cli
 
     def menu
         get_passes
+        get_pass_url
         list_passes
         user_input
         get_user_pass
@@ -22,6 +23,11 @@ class PassInfo::Cli
     
     def get_passes
         @passes = PassInfo::Pass.all
+    end
+
+    def get_pass_url
+        a = PassInfo::Pass.urls
+        binding.pry
     end
 
     def list_passes
@@ -62,7 +68,7 @@ class PassInfo::Cli
         #     puts pass.conditions
         #     puts pass.weather
         end
-        binding.pry
+        #binding.pry
     end
 
   end
