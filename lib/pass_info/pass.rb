@@ -23,7 +23,9 @@ class PassInfo::Pass
         end
     end
 
-    def report
+    def report(get_user_pass_url)
+        a = get_user_pass_url
+        binding.pry
         PassInfo::Scraper.scrape_passes if @report.empty?
         @report
     end

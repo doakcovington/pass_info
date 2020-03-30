@@ -15,7 +15,7 @@ class PassInfo::Cli
         user_input
         get_user_pass
         get_user_pass_url
-        get_report
+        get_report(get_user_pass_url)
         while !valid_input?
             puts "\n #{@input} is not a valid number. Please enter a valid number..."
             get_user_pass
@@ -48,8 +48,7 @@ class PassInfo::Cli
     end
 
     def get_user_pass_url
-        flag = @urls[@input_to_index]
-        flag
+        @urls[@input_to_index]
     end
 
     def valid_input?
@@ -59,9 +58,10 @@ class PassInfo::Cli
         end
         flag
     end
+    
 
-    def get_report
-        report = PassInfo::Scraper.scrape_report
+    def get_report(get_user_pass_url)
+        report = PassInfo::Scraper.scrape_report(get_user_pass_url)
         #binding.pry
     end
     
