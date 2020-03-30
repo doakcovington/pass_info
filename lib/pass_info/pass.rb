@@ -4,8 +4,9 @@ class PassInfo::Pass
 
     @@all = []
 
-    def initialize(name)
+    def initialize(name,url)
         @name = name
+        @url = url
         save
     end
 

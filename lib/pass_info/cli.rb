@@ -62,7 +62,7 @@ class PassInfo::Cli
         #     puts pass.conditions
         #     puts pass.weather
         end
-        #binding.pry
+        binding.pry
     end
 
   end

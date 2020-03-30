@@ -5,8 +5,9 @@ class PassInfo::Scraper
         passes = doc.css("div.trafficCol div.content ul li")
         passes.each do |pass|
             name = pass.text
-            PassInfo::Pass.new(name)
-            ref = pass.attr("value")
+            ref = pass.css('a').attribute('href').value
+            PassInfo::Pass.new(name,ref)
+            #binding.pry
         end
     end
 
