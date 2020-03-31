@@ -21,9 +21,10 @@ class PassInfo::Scraper
 
     def self.scrape_report(get_user_pass_url)#"https://www.wsdot.com/traffic/passes/blewett/default.aspx"
         a = get_user_pass_url
-        binding.pry
-        doc = Nokogiri::HTML(open("a"))
+        a.insert(0,"https:")
+        doc = Nokogiri::HTML(open(a))
         report = doc.css("div#PassPageBoxPanel.content")
+        #binding.pry
         pass_report = {}
         report.each do |info|
             pass_report[:Temperature] = info.css("span#PassInfoTemperature").text
@@ -45,6 +46,25 @@ class PassInfo::Scraper
         end
         pass_report
         #binding.pry
+    end
+
+    def self.scrape_text
+        doc = Nokogiri::HTML(open("https://www.wsdot.com/traffic/passes/PassInformation.aspx"))
+        report = doc.css("div.passInformation")
+        passes = []
+        pass_report = {}
+        report.each do |pass|
+            info = pass.css("div.descrip span.Red")
+            info.each do |text|
+                passes << text.text
+            end
+        end
+        passes
+        pass_report[:Elevation] = passes[0]
+        pass_report[:Temperature] = passes[1]
+        pass_report[:Conditions] = passes[2]
+        pass_report
+        binding.pry
     end
 
 

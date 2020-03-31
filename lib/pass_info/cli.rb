@@ -10,6 +10,7 @@ class PassInfo::Cli
 
     def menu
         get_passes
+        get_text
         list_passes
         get_pass_urls
         user_input
@@ -33,6 +34,10 @@ class PassInfo::Cli
         end
     end
 
+    def get_text
+        @text = PassInfo::Scraper.scrape_text
+    end
+
     def list_passes
         @passes.each_with_index {|pass, index| puts "#{index + 1}. #{pass.name}"}
     end
@@ -49,6 +54,7 @@ class PassInfo::Cli
 
     def get_user_pass_url
         @urls[@input_to_index]
+        #binding.pry
     end
 
     def valid_input?
