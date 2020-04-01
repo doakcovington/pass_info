@@ -24,6 +24,10 @@ class PassInfo::Pass
         end
     end
 
+    def self.find_pass(name)
+        @@all.detect{|pass| pass.name == name}
+    end
+
     def report(get_user_pass_url)
         a = get_user_pass_url
         binding.pry

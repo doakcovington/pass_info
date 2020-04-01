@@ -82,7 +82,7 @@ class PassInfo::Scraper
         #     #binding.pry
         # end
         text.each do |pass|
-            pass_text << pass.reject{|element| element == "" || element == " "}
+            pass_text << pass.reject{|element| element == "" || element == " "}#removes blank elements
         end
         passes
         text
