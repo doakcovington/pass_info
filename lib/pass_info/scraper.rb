@@ -8,7 +8,8 @@ class PassInfo::Scraper
             if count <= 14
                 name = pass.text
                 ref = pass.css('a').attribute('href').value
-                PassInfo::Pass.new(name,ref)
+                #PassInfo::Pass.new(@pass_report)
+                #binding.pry
                 count += 1
             end
             #binding.pry
@@ -25,14 +26,14 @@ class PassInfo::Scraper
         doc = Nokogiri::HTML(open(a))
         report = doc.css("div#PassPageBoxPanel.content")
         #binding.pry
-        pass_report = {}
+        @pass_report = {}
         report.each do |info|
-            pass_report[:Temperature] = info.css("span#PassInfoTemperature").text
-            pass_report[:Elevation] = info.css("span#PassInfoElevationF").text
-            pass_report[:Restrictions_One] = info.css("span#PassInfoRestrictionsOne").text
-            pass_report[:Restrictions_Two] = info.css("span#PassInfoRestrictionsTwo").text
-            pass_report[:Coditions] = info.css("span#PassInfoConditions").text
-            pass_report[:Weather] = info.css("span#PassInfoWeather").text
+            @pass_report[:Temperature] = info.css("span#PassInfoTemperature").text
+            @pass_report[:Elevation] = info.css("span#PassInfoElevationF").text
+            @pass_report[:Restrictions_One] = info.css("span#PassInfoRestrictionsOne").text
+            @pass_report[:Restrictions_Two] = info.css("span#PassInfoRestrictionsTwo").text
+            @pass_report[:Coditions] = info.css("span#PassInfoConditions").text
+            @pass_report[:Weather] = info.css("span#PassInfoWeather").text
             #report[:Restrictions] = 'none'
             #report[:conditions] = 'roadways are wet'
             #report[:weather] = 'partly cloudy'
@@ -44,7 +45,7 @@ class PassInfo::Scraper
         #conditions = doc.css("span#PassInfoConditions")
         #weather = doc.css("span#PassInfoWeather")
         end
-        pass_report
+        @@pass_report
         #binding.pry
     end
 
@@ -53,7 +54,7 @@ class PassInfo::Scraper
         report = doc.css("div.pass")
         passes = []
         text = []
-        pass_report = {}
+        @pass_report = {}
         report.each do |pass|
             passes << pass.text
             # info = pass.css("div.descripRed")
@@ -70,25 +71,30 @@ class PassInfo::Scraper
         passes.each do |element|
             text << element.split("\r")
         end
-        c = [] #array containing the individual info elements from text only wsdot
-        text.each do |a|
-            a.each do |b|
-                if b.length > 12
-                    c << b
+        pass_text = [] #array containing the individual info elements from text only wsdot
+        text.each do |pass| # a is text for individual pass from wsdot text only site
+            pass.each do |info| # b is each element from the individual pass(a)
+                a = info.gsub("\n", "").gsub("\t","")
+                #b = a.gsub("\t","")
+                if a.length > 12
+                    pass_text << a
                 end
             end
+            #binding.pry
         end
         #binding.pry
         passes
         text
-        pass_report[:Name] = c[0]
-        pass_report[:Elevation] = c[1]
-        pass_report[:Temperature] = c[2]
-        pass_report[:"#{c[3]}"] = c[4]
-        pass_report[:"#{c[5]}"] = c[6]
-        pass_report[:Restrictions_One] = c[7]
-        pass_report[:Restrictions_Two] = c[8]
-        pass_report
+        @pass_report[:Name] = pass_text[0]
+        @pass_report[:Elevation] = pass_text[1]
+        @pass_report[:Temperature] = pass_text[2]
+        @pass_report[:conditions] = pass_text[4]
+        @pass_report[:weather] = pass_text[6]
+        @pass_report[:Restrictions_One] = pass_text[7]
+        @pass_report[:Restrictions_Two] = pass_text[8]
+        #binding.pry
+        @pass_report
+        PassInfo::Pass.new(@pass_report)
         binding.pry
     end
 
