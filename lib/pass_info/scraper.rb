@@ -56,7 +56,7 @@ class PassInfo::Scraper
         text = []
         @pass_report = {}
         report.each do |pass|
-            passes << pass.text
+            passes << pass.text.gsub("\n","").gsub("\t","")
             # info = pass.css("div.descripRed")
             # info.each do |text|
             #     passes << text.text
@@ -72,16 +72,17 @@ class PassInfo::Scraper
             text << element.split("\r")
         end
         pass_text = [] #array containing the individual info elements from text only wsdot
-        text.each do |pass| # a is text for individual pass from wsdot text only site
-            pass.each do |info| # b is each element from the individual pass(a)
-                a = info.gsub("\n", "").gsub("\t","")
-                binding.pry
-                #b = a.gsub("\t","")
-                if a.length > 12
-                    pass_text << a
-                end
-            end
-            #binding.pry
+        # text.each do |pass| # a is text for individual pass from wsdot text only site
+        #     pass.each do |info| # b is each element from the individual pass(a)
+        #         a = info.gsub("\n", "").gsub("\t","")
+        #         if a.length > 12
+        #             pass_text << a
+        #         end
+        #     end
+        #     #binding.pry
+        # end
+        text.each do |pass|
+            pass_text << pass.reject{|element| element.empty?}
         end
         binding.pry
         passes
