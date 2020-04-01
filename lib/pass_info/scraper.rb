@@ -82,19 +82,20 @@ class PassInfo::Scraper
         #     #binding.pry
         # end
         text.each do |pass|
-            pass_text << pass.reject{|element| element.empty?}
+            pass_text << pass.reject{|element| element == "" || element == " "}
         end
-        binding.pry
         passes
         text
-        @pass_report[:name] = pass_text[0]
-        @pass_report[:elevation] = pass_text[1]
-        @pass_report[:temperature] = pass_text[2]
-        @pass_report[:conditions] = pass_text[3]
-        @pass_report[:weather] = pass_text[4]
-        @pass_report[:restrictions_One] = pass_text[5]
-        @pass_report[:restrictions_Two] = pass_text[6]
-        PassInfo::Pass.new(@pass_report)
+        pass_text.each do |info|
+            @pass_report[:name] = info[0]
+            @pass_report[:elevation] = info[1]
+            @pass_report[:temperature] = info[2]
+            @pass_report[:conditions] = info[4]
+            @pass_report[:weather] = info[6]
+            #@pass_report[:restrictions_One] = info[5]
+            #@pass_report[:restrictions_Two] = info[6]
+            PassInfo::Pass.new(@pass_report)
+        end
         binding.pry
     end
 
