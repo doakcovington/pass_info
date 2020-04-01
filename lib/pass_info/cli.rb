@@ -15,8 +15,6 @@ class PassInfo::Cli
         get_pass_urls
         user_input
         get_user_pass
-        get_user_pass_url
-        get_report(get_user_pass_url)
         while !valid_input?
             puts "\n #{@input} is not a valid number. Please enter a valid number..."
             get_user_pass
@@ -49,7 +47,8 @@ class PassInfo::Cli
     def get_user_pass
         #binding.pry
         @input_to_index = @input.to_i - 1 #convert user input to array index
-        @passes[@input_to_index] #the pass the user chose
+       @user_pass = @passes[@input_to_index] #the pass the user chose
+       #binding.pry
     end
 
     def get_user_pass_url
@@ -66,23 +65,17 @@ class PassInfo::Cli
     end
     
 
-    def get_report(get_user_pass_url)
-        report = PassInfo::Scraper.scrape_report(get_user_pass_url)
-        #binding.pry
-    end
+    # def get_report(get_user_pass_url)
+    #     report = PassInfo::Scraper.scrape_report(get_user_pass_url)
+    #     #binding.pry
+    # end
     
     def pass_report
-        puts "Pass Report:#{get_user_pass.name}"
-        get_report.each do |key, value|
-            puts "#{key}: #{value}"
-        #     puts pass.temperature
-        #     puts pass.elevation
-        #     puts pass.restrictionsone
-        #     puts pass.restrictionstwo
-        #     puts pass.conditions
-        #     puts pass.weather
-        end
-        #binding.pry
+        puts "Pass Report:"
+        puts get_user_pass.name
+        puts get_user_pass.temperature
+        puts get_user_pass.elevation
+        puts get_user_pass.conditions
     end
 
   end

@@ -24,8 +24,8 @@ class PassInfo::Pass
         end
     end
 
-    def self.find_pass(name)
-        @@all.detect{|pass| pass.name == name}
+    def self.find_pass(user_pass)
+        @@all.detect{|pass| pass.name == user_pass}
     end
 
     def report(get_user_pass_url)
