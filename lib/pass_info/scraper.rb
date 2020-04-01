@@ -50,19 +50,43 @@ class PassInfo::Scraper
 
     def self.scrape_text
         doc = Nokogiri::HTML(open("https://www.wsdot.com/traffic/passes/PassInformation.aspx"))
-        report = doc.css("div.passInformation")
+        report = doc.css("div.pass")
         passes = []
+        text = []
         pass_report = {}
         report.each do |pass|
-            info = pass.css("div.descrip span.Red")
-            info.each do |text|
-                passes << text.text
+            passes << pass.text
+            # info = pass.css("div.descripRed")
+            # info.each do |text|
+            #     passes << text.text
+            #     #binding.pry
+            # end
+
+            # red = pass.css("div.descripRed")
+            # red.each do |info|
+            #     text << info.text.strip
+            # end
+        end
+        passes.each do |element|
+            text << element.split("\r")
+        end
+        c = [] #array containing the individual info elements from text only wsdot
+        text.each do |a|
+            a.each do |b|
+                if b.length > 12
+                    c << b
+                end
             end
         end
+        binding.pry
         passes
+        text
         pass_report[:Elevation] = passes[0]
         pass_report[:Temperature] = passes[1]
-        pass_report[:Conditions] = passes[2]
+        pass_report[:Conditions] = text[0]
+        pass_report[:Weather] = text[1]
+        pass_report[:Restrictions_North_or_West] = text[2]
+        pass_report[:Restrictions_South_or_East] = text[3]
         pass_report
         binding.pry
     end
