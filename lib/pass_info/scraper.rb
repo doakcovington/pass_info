@@ -75,6 +75,7 @@ class PassInfo::Scraper
         text.each do |pass| # a is text for individual pass from wsdot text only site
             pass.each do |info| # b is each element from the individual pass(a)
                 a = info.gsub("\n", "").gsub("\t","")
+                binding.pry
                 #b = a.gsub("\t","")
                 if a.length > 12
                     pass_text << a
@@ -82,18 +83,16 @@ class PassInfo::Scraper
             end
             #binding.pry
         end
-        #binding.pry
+        binding.pry
         passes
         text
-        @pass_report[:Name] = pass_text[0]
-        @pass_report[:Elevation] = pass_text[1]
-        @pass_report[:Temperature] = pass_text[2]
-        @pass_report[:conditions] = pass_text[4]
-        @pass_report[:weather] = pass_text[6]
-        @pass_report[:Restrictions_One] = pass_text[7]
-        @pass_report[:Restrictions_Two] = pass_text[8]
-        #binding.pry
-        @pass_report
+        @pass_report[:name] = pass_text[0]
+        @pass_report[:elevation] = pass_text[1]
+        @pass_report[:temperature] = pass_text[2]
+        @pass_report[:conditions] = pass_text[3]
+        @pass_report[:weather] = pass_text[4]
+        @pass_report[:restrictions_One] = pass_text[5]
+        @pass_report[:restrictions_Two] = pass_text[6]
         PassInfo::Pass.new(@pass_report)
         binding.pry
     end

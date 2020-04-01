@@ -1,6 +1,6 @@
 class PassInfo::Pass
 
-    attr_accessor :Name, :url, :temperature, :elevation, :restrictions_one, :restrictions_two, :conditions, :weather
+    attr_accessor :name, :url, :temperature, :elevation, :restrictions_one, :restrictions_two, :conditions, :weather
 
     @@all = []
 
