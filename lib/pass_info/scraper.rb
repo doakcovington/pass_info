@@ -78,15 +78,16 @@ class PassInfo::Scraper
                 end
             end
         end
-        binding.pry
+        #binding.pry
         passes
         text
-        pass_report[:Elevation] = passes[0]
-        pass_report[:Temperature] = passes[1]
-        pass_report[:Conditions] = text[0]
-        pass_report[:Weather] = text[1]
-        pass_report[:Restrictions_North_or_West] = text[2]
-        pass_report[:Restrictions_South_or_East] = text[3]
+        pass_report[:Name] = c[0]
+        pass_report[:Elevation] = c[1]
+        pass_report[:Temperature] = c[2]
+        pass_report[:"#{c[3]}"] = c[4]
+        pass_report[:"#{c[5]}"] = c[6]
+        pass_report[:Restrictions_One] = c[7]
+        pass_report[:Restrictions_Two] = c[8]
         pass_report
         binding.pry
     end
