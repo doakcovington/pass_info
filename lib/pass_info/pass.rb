@@ -5,9 +5,11 @@ class PassInfo::Pass
     @@all = []
 
     def initialize(pass_report)
-        pass_report.each do |k,v|
-            self.instance_variable_set("@#{k}", v)
-         end
+        #binding.pry
+        pass_report.each {|k,v| self.send("#{k}=", v)}
+        # pass_report.each do |k,v|
+        #     self.instance_variable_set("@#{k}", v)
+        #  end
         save
     end
 
