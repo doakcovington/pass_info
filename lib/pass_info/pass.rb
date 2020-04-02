@@ -1,15 +1,11 @@
 class PassInfo::Pass
 
-    attr_accessor :name, :url, :temperature, :elevation, :restrictions_one, :restrictions_two, :conditions, :weather
+    attr_accessor :name, :temperature, :elevation, :conditions, :weather
 
     @@all = []
 
     def initialize(pass_report)
-        #binding.pry
         pass_report.each {|k,v| self.send("#{k}=", v)}
-        # pass_report.each do |k,v|
-        #     self.instance_variable_set("@#{k}", v)
-        #  end
         save
     end
 

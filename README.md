@@ -1,6 +1,6 @@
 # PassInfo
 
-Get up to date information on Washington State Mountain Passes
+Get up to date information on Washington State Mountain Passes. The data in the app is from the Washington State Department of Transportation (WSDOT) website: https://www.wsdot.com/traffic/passes/PassInformation.aspx#cayusepasssr123link.
 
 ## Installation
 
@@ -20,7 +20,7 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Follow the instructions in the terminal.
 
 ## Development
 

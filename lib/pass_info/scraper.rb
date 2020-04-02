@@ -6,15 +6,12 @@ class PassInfo::Scraper
         count = 0
         passes.each do |pass|
             if count <= 14
-                name = pass.text
                 ref = pass.css('a').attribute('href').value
                 count += 1
             end
         end
         count
     end
-
-    #try using .send to send the info from the hash to the report
 
     # def self.scrape_report(get_user_pass_url)#"https://www.wsdot.com/traffic/passes/blewett/default.aspx"
     #     a = get_user_pass_url
