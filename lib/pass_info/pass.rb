@@ -4,8 +4,6 @@ class PassInfo::Pass
 
     @@all = []
 
-    @@urls = []
-
     def initialize(pass_report)
         pass_report.each do |k,v|
             self.instance_variable_set("@#{k}", v)
@@ -18,21 +16,8 @@ class PassInfo::Pass
         @@all
     end
 
-    def self.urls
-        self.all.each do |link|
-            @@urls << link.url
-        end
-    end
-
     def self.find_pass(user_pass)
         @@all.detect{|pass| pass.name == user_pass}
-    end
-
-    def report(get_user_pass_url)
-        a = get_user_pass_url
-        binding.pry
-        PassInfo::Scraper.scrape_passes if @report.empty?
-        @report
     end
 
     def save

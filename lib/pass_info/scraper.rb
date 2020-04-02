@@ -8,14 +8,10 @@ class PassInfo::Scraper
             if count <= 14
                 name = pass.text
                 ref = pass.css('a').attribute('href').value
-                #PassInfo::Pass.new(@pass_report)
-                #binding.pry
                 count += 1
             end
-            #binding.pry
         end
         count
-        #binding.pry
     end
 
     #try using .send to send the info from the hash to the report
@@ -57,30 +53,11 @@ class PassInfo::Scraper
         @pass_report = {}
         report.each do |pass|
             passes << pass.text.gsub("\n","").gsub("\t","")
-            # info = pass.css("div.descripRed")
-            # info.each do |text|
-            #     passes << text.text
-            #     #binding.pry
-            # end
-
-            # red = pass.css("div.descripRed")
-            # red.each do |info|
-            #     text << info.text.strip
-            # end
         end
         passes.each do |element|
             text << element.split("\r")
         end
         pass_text = [] #array containing the individual info elements from text only wsdot
-        # text.each do |pass| # a is text for individual pass from wsdot text only site
-        #     pass.each do |info| # b is each element from the individual pass(a)
-        #         a = info.gsub("\n", "").gsub("\t","")
-        #         if a.length > 12
-        #             pass_text << a
-        #         end
-        #     end
-        #     #binding.pry
-        # end
         text.each do |pass|
             pass_text << pass.reject{|element| element == "" || element == " "}#removes blank elements
         end

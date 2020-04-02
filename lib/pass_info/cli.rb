@@ -5,31 +5,29 @@ class PassInfo::Cli
       puts "Pass Info provides you with up to date status reports for all Washington State Mountain Passes."
       puts "Please be sure you are not driving while using this app!"
       menu
-      pass_report
     end
 
     def menu
         get_passes
         get_text
         list_passes
-        get_pass_urls
         user_input
         get_user_pass
         while !valid_input?
             puts "\n #{@input} is not a valid number. Please enter a valid number..."
-            get_user_pass
+            @passes.clear
+            menu
         end
+        pass_report
+        ask_to_repeat
     end
     
     def get_passes
         @passes = PassInfo::Pass.all
     end
 
-    def get_pass_urls
-        @urls = []
-        PassInfo::Pass.all.each do |link|
-            @urls << link.url
-        end
+    def clear_passes
+        @passes.clear
     end
 
     def get_text
@@ -45,15 +43,8 @@ class PassInfo::Cli
     end
 
     def get_user_pass
-        #binding.pry
         @input_to_index = @input.to_i - 1 #convert user input to array index
-       @user_pass = @passes[@input_to_index] #the pass the user chose
-       #binding.pry
-    end
-
-    def get_user_pass_url
-        @urls[@input_to_index]
-        #binding.pry
+        @user_pass = @passes[@input_to_index] #the pass the user chose
     end
 
     def valid_input?
@@ -64,18 +55,27 @@ class PassInfo::Cli
         flag
     end
     
-
-    # def get_report(get_user_pass_url)
-    #     report = PassInfo::Scraper.scrape_report(get_user_pass_url)
-    #     #binding.pry
-    # end
-    
     def pass_report
-        puts "Pass Report:"
+        puts "\nPass Report:"
         puts get_user_pass.name
         puts get_user_pass.temperature
         puts get_user_pass.elevation
-        puts get_user_pass.conditions
+        puts "Weather: #{get_user_pass.weather}"
+        puts "Conditions: #{get_user_pass.conditions}"
+    end
+
+    def ask_to_repeat
+        puts "\n Would you like to select another pass (y/n)"
+        choice = gets.downcase.strip
+        if choice == "y"
+            clear_passes
+            menu
+        elsif choice == "n"
+            exit
+        else
+            puts "please enter in y or n"
+            ask_to_repeat
+        end
     end
 
   end
