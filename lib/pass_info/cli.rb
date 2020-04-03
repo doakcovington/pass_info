@@ -1,16 +1,12 @@
 
 class PassInfo::Cli 
     def call 
-      puts "\nWelcome to Pass Info!"
-      puts "Pass Info provides you with up to date status reports for all Washington State Mountain Passes."
-      puts "Please be sure you are not driving while using this app!"
-      sleep(1)
-      puts "\nEnter in the corresponding number for the WSDOT Mountain Pass you would like to check or enter 'e' to exit the program:"
       menu
     end
 
     def menu
-        get_passes
+        welcome_user
+        #get_passes
         get_text
         list_passes
         user_input
@@ -24,13 +20,21 @@ class PassInfo::Cli
         ask_to_repeat
     end
 
+    def welcome_user
+        puts "\nWelcome to Pass Info!"
+        puts "Pass Info provides you with up to date status reports for all Washington State Mountain Passes."
+        puts "Please be sure you are not driving while using this app!"
+        sleep(1)
+        puts "\nEnter in the corresponding number for the WSDOT Mountain Pass you would like to check or enter 'e' to exit the program:"
+    end
+
     def exit_program
         exit
     end
 
-    def get_passes
-        @passes = PassInfo::Pass.all
-    end
+    # def get_passes
+    #     @passes = PassInfo::Pass.all
+    # end
 
     def clear_passes
         @passes.clear
@@ -41,7 +45,7 @@ class PassInfo::Cli
     end
 
     def list_passes
-        @passes.each_with_index {|pass, index| puts "#{index + 1}. #{pass.name}"}
+        @passes = PassInfo::Pass.all.each_with_index {|pass, index| puts "#{index + 1}. #{pass.name}"}
     end
 
     def user_input
@@ -71,6 +75,8 @@ class PassInfo::Cli
         puts get_user_pass.elevation
         puts "Weather: #{get_user_pass.weather}"
         puts "Conditions: #{get_user_pass.conditions}"
+        puts get_user_pass.restrictions_One
+        puts get_user_pass.restrictions_Two
     end
 
     def ask_to_repeat

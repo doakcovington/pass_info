@@ -66,8 +66,14 @@ class PassInfo::Scraper
             @pass_report[:temperature] = info[2]
             @pass_report[:conditions] = info[4]
             @pass_report[:weather] = info[6]
-            #@pass_report[:restrictions_One] = info[5]
-            #@pass_report[:restrictions_Two] = info[6]
+            if info[7].include?("Restrictions")
+                @pass_report[:restrictions_One] = info[7]
+                @pass_report[:restrictions_Two] = info[8]
+            else
+                @pass_report[:restrictions_One] = nil
+                @pass_report[:restrictions_Two] = nil
+            end
+            #binding.pry
             PassInfo::Pass.new(@pass_report)
         end
     end
