@@ -1,9 +1,11 @@
 
 class PassInfo::Cli 
     def call 
-      puts "Welcome to Pass Info!"
+      puts "\nWelcome to Pass Info!"
       puts "Pass Info provides you with up to date status reports for all Washington State Mountain Passes."
       puts "Please be sure you are not driving while using this app!"
+      sleep(1)
+      puts "\nEnter in the corresponding number for the WSDOT Mountain Pass you would like to check or enter 'e' to exit the program:"
       menu
     end
 
@@ -21,7 +23,11 @@ class PassInfo::Cli
         pass_report
         ask_to_repeat
     end
-    
+
+    def exit_program
+        exit
+    end
+
     def get_passes
         @passes = PassInfo::Pass.all
     end
@@ -39,7 +45,10 @@ class PassInfo::Cli
     end
 
     def user_input
-        @input = gets.strip
+        @input = gets.strip.downcase
+        if @input == 'e'
+            exit_program
+        end
     end
 
     def get_user_pass
