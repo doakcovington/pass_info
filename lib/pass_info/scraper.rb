@@ -1,18 +1,5 @@
 class PassInfo::Scraper
 
-    # def self.scrape_passes
-    #     doc = Nokogiri::HTML(open("https://www.wsdot.com/traffic/passes/"))
-    #     passes = doc.css("div.trafficCol div.content ul li")
-    #     count = 0
-    #     passes.each do |pass|
-    #         if count <= 14
-    #             ref = pass.css('a').attribute('href').value
-    #             count += 1
-    #         end
-    #     end
-    #     count
-    # end
-
     def self.scrape_text
         doc = Nokogiri::HTML(open("https://www.wsdot.com/traffic/passes/PassInformation.aspx"))
         report = doc.css("div.pass")
@@ -23,7 +10,7 @@ class PassInfo::Scraper
             passes << pass.text.gsub("\n","").gsub("\t","")
         end
         passes.each do |element|
-            text << element.split("\r")
+            text << element.split("\r") #push the pass text into a subarray
         end
         pass_text = [] #array containing the individual info elements from text only wsdot
         text.each do |pass|
@@ -43,7 +30,6 @@ class PassInfo::Scraper
                 @pass_report[:restrictions_One] = nil
                 @pass_report[:restrictions_Two] = nil 
             end
-            #binding.pry
             PassInfo::Pass.new(@pass_report)
         end
     end

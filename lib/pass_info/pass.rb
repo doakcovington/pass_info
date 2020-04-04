@@ -14,12 +14,12 @@ class PassInfo::Pass
         @@all
     end
 
-    def self.find_pass(user_pass)
-        @@all.detect{|pass| pass.name == user_pass}
-    end
-
     def self.pass_names
         PassInfo::Pass.all.collect{|pass| pass.name}
+    end
+
+    def pass_text
+        @text = PassInfo::Scraper.scrape_text
     end
     
     def save

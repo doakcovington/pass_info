@@ -6,7 +6,7 @@ class PassInfo::Cli
 
     def menu
         welcome_user
-        get_text
+        @text
         PassInfo::Pass.pass_names
         list_passes
         user_input
@@ -31,10 +31,6 @@ class PassInfo::Cli
         exit
     end
 
-    def get_text
-        @text = PassInfo::Scraper.scrape_text
-    end
-
     def list_passes
         @passes = PassInfo::Pass.all.each_with_index {|pass, index| puts "#{index + 1}. #{pass.name}"}
     end
@@ -52,7 +48,7 @@ class PassInfo::Cli
 
     def get_user_pass
         @input_to_index = @input.to_i - 1 #convert user input to array index
-        @user_pass = @passes[@input_to_index] #the pass the user chose
+        user_pass = @passes[@input_to_index] #the pass the user chose
     end
 
     def valid_input?
