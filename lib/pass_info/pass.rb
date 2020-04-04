@@ -10,7 +10,7 @@ class PassInfo::Pass
     end
 
     def self.all
-        PassInfo::Scraper.scrape_passes if @@all.empty?
+        PassInfo::Scraper.scrape_text if @@all.empty?
         @@all
     end
 
@@ -18,6 +18,10 @@ class PassInfo::Pass
         @@all.detect{|pass| pass.name == user_pass}
     end
 
+    def self.pass_names
+        PassInfo::Pass.all.collect{|pass| pass.name}
+    end
+    
     def save
         @@all << self
     end

@@ -6,8 +6,8 @@ class PassInfo::Cli
 
     def menu
         welcome_user
-        #get_passes
         get_text
+        PassInfo::Pass.pass_names
         list_passes
         user_input
         get_user_pass
@@ -24,20 +24,11 @@ class PassInfo::Cli
         puts "\nWelcome to Pass Info!"
         puts "Pass Info provides you with up to date status reports for all Washington State Mountain Passes."
         puts "Please be sure you are not driving while using this app!"
-        sleep(1)
         puts "\nEnter in the corresponding number for the WSDOT Mountain Pass you would like to check or enter 'e' to exit the program:"
     end
 
     def exit_program
         exit
-    end
-
-    # def get_passes
-    #     @passes = PassInfo::Pass.all
-    # end
-
-    def clear_passes
-        @passes.clear
     end
 
     def get_text
@@ -46,6 +37,10 @@ class PassInfo::Cli
 
     def list_passes
         @passes = PassInfo::Pass.all.each_with_index {|pass, index| puts "#{index + 1}. #{pass.name}"}
+    end
+
+    def clear_passes
+        @passes.clear
     end
 
     def user_input
