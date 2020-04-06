@@ -33,6 +33,4 @@ class PassInfo::Scraper
             PassInfo::Pass.new(@pass_report)
         end
     end
-
-
 end

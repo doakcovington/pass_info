@@ -6,7 +6,6 @@ class PassInfo::Cli
 
     def menu
         welcome_user
-        @text
         PassInfo::Pass.pass_names
         list_passes
         user_input

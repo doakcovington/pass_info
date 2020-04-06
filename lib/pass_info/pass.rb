@@ -17,10 +17,6 @@ class PassInfo::Pass
     def self.pass_names
         PassInfo::Pass.all.collect{|pass| pass.name}
     end
-
-    def pass_text
-        @text = PassInfo::Scraper.scrape_text
-    end
     
     def save
         @@all << self
