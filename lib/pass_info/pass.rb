@@ -26,3 +26,4 @@ class PassInfo::Pass
         @@all.clear
     end
 end
+

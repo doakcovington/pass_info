@@ -1,4 +1,4 @@
-
+#WDGTR
 class PassInfo::Cli 
     def call 
       menu
